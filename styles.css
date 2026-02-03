@@ -1,0 +1,10 @@
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightsteelblue;
+}
+
+.pixel {
+    background-color: pink;
+}
+
