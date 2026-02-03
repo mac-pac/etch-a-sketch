@@ -1,15 +1,16 @@
 const container = document.querySelector('#container');
 
-const canvasResolution = 16 * 16;
-const canvasSize = 800;
+function generateCanvas(resolution) {
 
-container.style.width = canvasSize + 'px';
-container.style.height = canvasSize + 'px';
+    const canvasResolution = resolution * resolution;
+    const canvasSize = 800;
 
-let pixelSize = (canvasSize/16) + "px";
-console.log(pixelSize)
+    container.style.width = canvasSize + 'px';
+    container.style.height = canvasSize + 'px';
 
-function generateCanvas() {
+    let pixelSize = (canvasSize/resolution) + "px";
+    console.log(pixelSize)
+
 
     for (let i = 0; i < canvasResolution; i++){
         const pixel = document.createElement('div');
@@ -22,14 +23,22 @@ function generateCanvas() {
     
 };
 
-generateCanvas();
+generateCanvas(16);
 
-const pixels = document.querySelectorAll('#container div');
+let pixels = document.querySelectorAll('#container div');
 
-pixels.forEach((pixel) => {
-    pixel.addEventListener('mouseover', () => sketchPxl(pixel));
-    
-});
+startSketch();
+
+
+function startSketch() {
+
+    pixels = document.querySelectorAll('#container div');
+
+    pixels.forEach((pixel) => {
+        pixel.addEventListener('mouseover', () => sketchPxl(pixel));
+        
+    });
+};
 
 function sketchPxl(pixel) {
     pixel.style["background-color"] = "blue";
@@ -42,5 +51,28 @@ function clearCanvas() {
 }
 
 const clearBtn = document.querySelector('#clearCanvas');
-
 clearBtn.addEventListener('click', clearCanvas);
+
+const resolutionPromptBtn = document.querySelector('#resolutionPromptRequest');
+resolutionPromptBtn.addEventListener('click', resolutionPrompt);
+
+
+function resolutionPrompt() {
+    const newResolution = prompt("Enter new resolution. (Max 100)");
+
+    if (newResolution > 100) {
+        alert("ERROR - Resolution entered is too big. Please enter a resolution less than 100 pixels.");
+        return 
+    };
+
+    clearScreen();
+    generateCanvas(newResolution);
+    startSketch();
+
+};
+
+function clearScreen() {
+    pixels.forEach((pixel) => {
+        container.removeChild(pixel);
+    })
+};
