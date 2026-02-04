@@ -100,7 +100,11 @@ function resolutionPrompt() {
 
     if (newResolution > 100) {
         alert("ERROR - Resolution entered is too big. Please enter a resolution less than 100 pixels.");
-        return 
+        return
+    };
+
+    if (newResolution == null) {
+        return
     };
 
     clearScreen();
