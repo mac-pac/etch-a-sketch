@@ -14,9 +14,17 @@
     background-color: #b52a2a;
     border: solid black;
     border-radius: 25px;
-    margin: 5% 5%;
+    max-width: 1500px;
+    width: 80%;
+    min-width: 810px;
     display: flex;
+    margin-top: 50px;
     flex-direction: column;
+}
+
+body {
+    display: flex;
+    justify-content: center;
 }
 
 .canvas {
